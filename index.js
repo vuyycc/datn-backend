@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 const http = require('http').Server(app)
 
 var corsOptions = {
-  origin: ["http://localhost:3000","http://127.0.0.1:8000"]
+  origin: ["http://localhost:3000","http://127.0.0.1:8000","https://patient-covid-19.onrender.com"]
 };
 
 
