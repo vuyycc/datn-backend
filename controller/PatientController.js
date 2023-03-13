@@ -13,9 +13,14 @@ const Euclidean = db.euclidean;
 const Manhattan = db.manhattan;
 const Op = db.Sequelize.Op;
 
+// let instantAxios = axios.create({
+//     timeout: 20000,
+//     baseURL: 'http://127.0.0.1:8000'
+// })
+
 let instantAxios = axios.create({
     timeout: 20000,
-    baseURL: 'http://127.0.0.1:8000'
+    baseURL: 'https://model-entropy-topsis.onrender.com'
 })
 
 const NUMBER_MONTH = 12
