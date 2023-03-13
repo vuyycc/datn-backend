@@ -19,7 +19,8 @@ const Op = db.Sequelize.Op;
 // })
 
 let instantAxios = axios.create({
-    timeout: 20000,
+    headers: {"Accept-Encoding": "gzip,deflate,compress"},
+    timeout: 120000,
     baseURL: 'https://model-entropy-topsis.onrender.com'
 })
 
