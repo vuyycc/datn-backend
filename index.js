@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const dotenv = require('dotenv')
-const http = require('http').Server(app)
+//const http = require('http').Server(app)
+const https = require(`https`);
 
 var corsOptions = {
   origin: ["http://localhost:3000","http://127.0.0.1:8000","https://patient-covid-19.onrender.com"]
@@ -44,5 +45,5 @@ db.sequelize.sync()
 
 const PORT=process.env.PORT
 
-http.listen(PORT, () => { console.log("Server started on http://localhost:" + PORT) })
+https.listen(PORT, () => { console.log("Server started on http://localhost:" + PORT) })
 module.exports = app;
