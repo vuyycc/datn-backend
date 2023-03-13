@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors')
 const dotenv = require('dotenv')
 //const http = require('http').Server(app)
-const https = require(`https`);
+const https = require(`https`).Server(app);
 
 var corsOptions = {
   origin: ["http://localhost:3000","http://127.0.0.1:8000","https://patient-covid-19.onrender.com"]
