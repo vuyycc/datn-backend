@@ -13,16 +13,16 @@ const Euclidean = db.euclidean;
 const Manhattan = db.manhattan;
 const Op = db.Sequelize.Op;
 
-// let instantAxios = axios.create({
-//     timeout: 20000,
-//     baseURL: 'http://127.0.0.1:8000'
-// })
-
 let instantAxios = axios.create({
-    headers: {"Accept-Encoding": "gzip,deflate,compress"},
-    timeout: 120000,
-    baseURL: 'https://model-entropy-topsis.onrender.com'
+    timeout: 20000,
+    baseURL: 'http://127.0.0.1:8000'
 })
+
+// let instantAxios = axios.create({
+//     headers: {"Accept-Encoding": "gzip,deflate,compress"},
+//     timeout: 120000,
+//     baseURL: 'https://model-entropy-topsis.onrender.com'
+// })
 
 const NUMBER_MONTH = 12
 
@@ -252,6 +252,7 @@ const getPagingData = (data, page, limit) => {
 //Add patient
 router.post('/add', async (req, res) => {
     // const authId = req.authenticateUser._id
+    
     const statusWithRole = req.body.roleUser == 'BS' ? 1 : 0
     const patient = {
         name: req.body.name,
