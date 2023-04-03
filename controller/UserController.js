@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
     })
 })
 
-//Add account
+//Thêm mới tài khoản
 router.post('/add', async (req, res) => {
 
     const saltRound = 10
@@ -81,7 +81,7 @@ router.post('/add', async (req, res) => {
     })
 })
 
-//Update account with id
+//Cập nhật thông tin tài khoản
 router.put('/edit/:id', (req, res) => {
     const id = req.params.id
 
@@ -152,7 +152,7 @@ router.put('/edit/:id', (req, res) => {
 
 })
 
-//get all Accounts
+//Lấy danh sách tài khoản
 router.get('/', (req, res) => {
     User.findAll().then(data => {
         res.send(data)
@@ -166,7 +166,7 @@ router.get('/', (req, res) => {
         ])
 })
 
-//get all Accounts with pagination
+//Lấy danh sách tài khoản với phân trang
 router.get('/all', (req, res) => {
     const { page, size, name } = req.query
     const { limit, offset } = getPagination(page, size);
@@ -202,7 +202,7 @@ const getPagingData = (data, page, limit) => {
     return { totalItems, accounts, totalPages, currentPage };
 };
 
-//Delete account with id
+//Xoá tài khoản theo id
 router.delete('/delete/:id', async (req, res) => {
     const id = req.params.id
 

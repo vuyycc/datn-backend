@@ -26,7 +26,7 @@ let instantAxios = axios.create({
 
 const NUMBER_MONTH = 12
 
-//cal rank patient
+//API tính toán rank
 router.get('/rank', async (req, res) => {
     const { measure } = req.query
     instantAxios.get('/patient/rank', { params: { measure: measure } }).then(resData => {
@@ -48,11 +48,10 @@ router.get('/rank', async (req, res) => {
 
 })
 
-//get rank
+//API lấy danh sách bệnh nhân đã xếp rank
 router.get('/rank/get', (req, res) => {
     const measure = req.query.measure
     const ModelMeasure = matchMeasure(measure)
-    var condition = {status: {[Op.eq]: 2} }
 
     ModelMeasure.findAll({ include: ["patient"], order: [['worst_similarity', 'DESC']] }).then(data => {
 
@@ -85,7 +84,7 @@ const matchMeasure = (measure) => {
     }
 }
 
-//get patient with id
+//Lấy thông tin bệnh nhân theo id
 router.get('/:id', async (req, res) => {
     let id = req.params.id
     if (!id) {
@@ -110,7 +109,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-//get info dashboard
+//Lấy thông tin dashboard
 router.get('/dashboard/info', (req, res) => {
 
     Patient.findAll().then(data => {
@@ -213,7 +212,7 @@ const subsDate = () => {
     return {listDate, dayDateNow}
 }
 
-//get list patient with pagination
+//Lấy danh sách bệnh nhân với phân trang
 router.get('/', (req, res) => {
     const { page, size, name } = req.query
     const { limit, offset } = getPagination(page, size);
@@ -249,9 +248,8 @@ const getPagingData = (data, page, limit) => {
     return { totalItems, patients, totalPages, currentPage };
 };
 
-//Add patient
+//Thêm mới bệnh nhân
 router.post('/add', async (req, res) => {
-    // const authId = req.authenticateUser._id
     
     const statusWithRole = req.body.roleUser == 'BS' ? 1 : 0
     const patient = {
@@ -286,7 +284,7 @@ router.post('/add', async (req, res) => {
         })
 })
 
-//Update patient with id
+//Cập nhật thông tin bệnh nhân với id
 router.put('/edit/:id', (req, res) => {
 
     const id = req.params.id
@@ -343,6 +341,7 @@ router.put('/edit/:id', (req, res) => {
 
 })
 
+//Cập nhật trạng thái
 router.put('/update-status', (req, res) => {
     const {id, status} = req.body
     Patient.update(
@@ -363,7 +362,7 @@ router.put('/update-status', (req, res) => {
     })
 })
 
-//Delete patient with id
+//Xoá bệnh nhân với id
 router.delete('/delete/:id', async (req, res) => {
     const id = req.params.id
 
@@ -392,7 +391,7 @@ router.delete('/delete/:id', async (req, res) => {
     })
 })
 
-//Update list patients with file csv
+//Tải lên danh sách bệnh nhân file csv
 router.post('/upload', constants.upload.single('File'), (req, res) => {
     const countPatientAddSuccess = 0
     const listError = []
@@ -446,7 +445,6 @@ router.post('/upload', constants.upload.single('File'), (req, res) => {
     })
 
 })
-
 
 
 module.exports = router;
